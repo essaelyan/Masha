@@ -83,8 +83,8 @@
     .btn-reserve {
       font-size:10px; font-weight:700; letter-spacing:.18em; text-transform:uppercase;
       padding:13px 28px; background:var(--gold); color:var(--bg);
-      border:none; cursor:pointer; text-decoration:none; display:inline-flex;
-      align-items:center; gap:8px;
+      border:1px solid transparent; cursor:pointer; text-decoration:none; display:inline-flex;
+      align-items:center; justify-content:center; gap:8px; line-height:1;
       transition:background .2s ease, transform .15s ease, box-shadow .2s ease;
       box-shadow:0 4px 20px rgba(196,151,58,.28);
     }
@@ -92,9 +92,9 @@
     .btn-reserve:active { transform:translateY(0); }
     .btn-ghost {
       font-size:10px; font-weight:600; letter-spacing:.16em; text-transform:uppercase;
-      padding:14px 34px; border:1px solid rgba(242,234,216,.22);
+      padding:13px 28px; border:1px solid rgba(242,234,216,.22);
       color:var(--cream); text-decoration:none; display:inline-flex;
-      align-items:center; gap:8px;
+      align-items:center; justify-content:center; gap:8px; line-height:1;
       transition:border-color .25s ease, color .25s ease, background .25s ease, transform .15s ease;
     }
     .btn-ghost:hover { border-color:rgba(196,151,58,.5); color:var(--gold-lt); background:rgba(196,151,58,.05); transform:translateY(-1px); }
