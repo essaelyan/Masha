@@ -70,10 +70,16 @@
     .nav-links { display:flex; gap:40px; list-style:none; }
     .nav-links a {
       font-size:10px; font-weight:600; letter-spacing:.16em; text-transform:uppercase;
-      color:rgba(242,234,216,.6); text-decoration:none;
-      transition:color .2s ease, opacity .2s ease;
+      color:rgba(242,234,216,.55); text-decoration:none; position:relative;
+      transition:color .25s ease;
     }
-    .nav-links a:hover { color:var(--cream); opacity:1; }
+    .nav-links a::after {
+      content:''; position:absolute; bottom:-3px; left:0;
+      width:0; height:1px; background:var(--gold);
+      transition:width .3s ease;
+    }
+    .nav-links a:hover { color:var(--cream); }
+    .nav-links a:hover::after { width:100%; }
     .btn-reserve {
       font-size:10px; font-weight:700; letter-spacing:.18em; text-transform:uppercase;
       padding:13px 28px; background:var(--gold); color:var(--bg);
@@ -96,83 +102,128 @@
 
     /* ── HERO ── */
     .hero {
-      position:relative; min-height:88vh;
-      display:flex; align-items:center; justify-content:center;
-      padding:0 64px; overflow:hidden;
+      position:relative; min-height:100vh;
+      display:flex; align-items:center;
+      padding:0 72px; overflow:hidden;
       background:var(--bg);
     }
-    .hero-ambient {
-      position:absolute; inset:0; pointer-events:none;
-    }
+    .hero-ambient { position:absolute; inset:0; pointer-events:none; }
     .hero-ambient::before {
-      content:''; position:absolute;
-      width:700px; height:700px; border-radius:50%;
-      background:radial-gradient(circle, rgba(155,28,42,.15) 0%, transparent 68%);
-      top:50%; left:50%; transform:translate(-50%,-50%);
+      content:''; position:absolute; width:680px; height:680px; border-radius:50%;
+      background:radial-gradient(circle, rgba(155,28,42,.13) 0%, transparent 68%);
+      top:55%; left:22%; transform:translate(-50%,-50%);
     }
     .hero-ambient::after {
-      content:''; position:absolute;
-      width:400px; height:400px; border-radius:50%;
+      content:''; position:absolute; width:420px; height:420px; border-radius:50%;
       background:radial-gradient(circle, rgba(196,151,58,.07) 0%, transparent 65%);
-      top:20%; right:10%; transform:translateY(-50%);
+      top:18%; right:18%; transform:translateY(-50%);
     }
+    /* 2-column editorial grid */
     .hero-inner {
       position:relative; z-index:2;
-      width:100%; max-width:800px; margin:0 auto;
-      display:flex; flex-direction:column; align-items:center;
-      text-align:center;
-      padding-top:80px;
+      width:100%; max-width:1320px; margin:0 auto;
+      display:grid; grid-template-columns:1fr 430px;
+      gap:80px; align-items:center; padding-top:88px;
     }
+    .hero-left { display:flex; flex-direction:column; }
     /* eyebrow */
     .hero-eyebrow {
-      display:inline-flex; align-items:center; gap:16px;
-      font-size:10px; font-weight:600; letter-spacing:.38em; text-transform:uppercase;
-      color:var(--gold); margin-bottom:32px;
+      display:inline-flex; align-items:center; gap:14px;
+      font-size:9.5px; font-weight:700; letter-spacing:.3em; text-transform:uppercase;
+      color:var(--gold); margin-bottom:36px;
     }
-    .hero-eyebrow::before, .hero-eyebrow::after {
-      content:''; width:28px; height:1px; background:var(--gold); display:block; opacity:.7;
-    }
-    /* heading */
+    .hero-eyebrow::before { content:''; width:36px; height:1px; background:var(--gold); display:block; opacity:.65; }
+    /* staggered heading */
     .hero h1 {
-      font-size:clamp(48px,6.8vw,92px); font-weight:600;
-      line-height:0.97; letter-spacing:-0.03em;
-      color:var(--cream); margin-bottom:28px;
+      font-size:clamp(52px,5.6vw,80px); font-weight:700;
+      line-height:1.02; letter-spacing:-0.03em;
+      color:var(--cream); margin-bottom:0;
     }
-    .hero h1 .h1-line { display:block; }
-    .hero h1 em { font-style:italic; color:var(--gold-lt); font-weight:400; }
+    .h1-line { display:block; }
+    .h1-l2 { padding-left:clamp(28px,2.8vw,44px); }
+    .h1-l3 { padding-left:clamp(56px,5.6vw,88px); font-style:italic; font-weight:400; color:var(--gold-lt); }
+    /* decorative rule */
+    .hero-rule {
+      width:52px; height:1px;
+      background:linear-gradient(to right, var(--gold), transparent);
+      margin:28px 0;
+    }
     /* description */
     .hero-desc {
-      font-size:15px; font-weight:300;
-      color:rgba(242,234,216,.52); line-height:1.8;
-      margin-bottom:16px; max-width:460px;
+      font-size:14px; font-weight:300;
+      color:rgba(242,234,216,.50); line-height:1.88;
+      max-width:400px; margin-bottom:36px;
     }
-    /* features row (compact, centered) */
-    .hero-features {
-      display:flex; flex-wrap:wrap; justify-content:center;
-      gap:10px 24px; margin-bottom:44px;
+    /* CTAs */
+    .hero-ctas { display:flex; gap:14px; align-items:center; margin-bottom:44px; }
+    /* stats bar */
+    .hero-stats {
+      display:flex; border-top:1px solid rgba(196,151,58,.12); padding-top:32px;
     }
-    .hf-item { display:flex; align-items:center; gap:8px; font-size:12px; color:rgba(242,234,216,.5); }
-    .hf-dot {
-      width:5px; height:5px; border-radius:50%;
-      background:var(--gold); opacity:.7; flex-shrink:0;
+    .hs-item { flex:1; }
+    .hs-item + .hs-item { border-left:1px solid rgba(196,151,58,.1); padding-left:26px; }
+    .hs-num {
+      font-family:'Playfair Display',serif; font-size:27px; font-weight:700;
+      color:var(--gold); line-height:1; display:block;
     }
-    /* ctas */
-    .hero-ctas { display:flex; gap:16px; align-items:center; justify-content:center; }
-    /* scroll indicator */
+    .hs-lbl {
+      font-size:9px; font-weight:700; letter-spacing:.12em; text-transform:uppercase;
+      color:var(--muted); display:block; margin-top:5px;
+    }
+    /* ── RIGHT — visual panel ── */
+    .hero-visual {
+      position:relative; height:580px; overflow:visible;
+    }
+    /* offset gold frame */
+    .hero-visual::before {
+      content:''; position:absolute;
+      top:20px; right:-20px; bottom:-20px; left:20px;
+      border:1px solid rgba(196,151,58,.22); pointer-events:none; z-index:0;
+    }
+    .hero-visual-img {
+      position:relative; z-index:1;
+      width:100%; height:100%; object-fit:cover; display:block;
+    }
+    /* left gradient fade on image */
+    .hero-visual-overlay {
+      position:absolute; inset:0; z-index:2;
+      background:linear-gradient(to right, rgba(10,9,8,.82) 0%, rgba(10,9,8,.2) 38%, transparent 60%);
+    }
+    /* year badge */
+    .hero-year-badge {
+      position:absolute; bottom:28px; left:-28px; z-index:10;
+      background:rgba(10,9,8,.96); border:1px solid rgba(196,151,58,.28);
+      padding:13px 18px; text-align:center; backdrop-filter:blur(12px);
+    }
+    .hyb-num {
+      font-family:'Playfair Display',serif; font-size:20px; font-weight:700;
+      color:var(--gold); line-height:1;
+    }
+    .hyb-lbl {
+      font-size:7.5px; font-weight:700; letter-spacing:.22em; text-transform:uppercase;
+      color:var(--muted); display:block; margin-top:4px;
+    }
+    /* vertical accent text */
+    .hero-vtxt {
+      position:absolute; right:-56px; top:50%; z-index:0;
+      transform:translateY(-50%) rotate(90deg);
+      font-size:7.5px; font-weight:700; letter-spacing:.46em; text-transform:uppercase;
+      color:rgba(196,151,58,.18); white-space:nowrap; pointer-events:none;
+    }
+    /* scroll indicator — bottom left */
     .hero-scroll-ind {
-      position:absolute; bottom:32px; left:50%; transform:translateX(-50%);
-      z-index:10; display:flex; flex-direction:column; align-items:center; gap:8px;
+      position:absolute; bottom:32px; left:72px;
+      z-index:10; display:flex; align-items:center; gap:12px;
     }
-    .scroll-mouse {
-      width:22px; height:36px; border:1.5px solid rgba(196,151,58,.4);
-      border-radius:12px; display:flex; justify-content:center;
+    .scroll-line {
+      width:32px; height:1px; background:rgba(196,151,58,.4);
+      animation:scrollPulse 2.2s ease-in-out infinite;
     }
-    .scroll-wheel {
-      width:3px; height:7px; background:var(--gold); border-radius:2px;
-      margin-top:6px; animation:scrollW 2s ease infinite;
+    @keyframes scrollPulse {
+      0%,100%{opacity:.4; transform:scaleX(1)}
+      50%{opacity:1; transform:scaleX(1.35)}
     }
-    @keyframes scrollW { 0%{opacity:1;transform:translateY(0)} 100%{opacity:0;transform:translateY(12px)} }
-    .scroll-label { font-size:9px; letter-spacing:.22em; text-transform:uppercase; color:var(--muted); }
+    .scroll-label { font-size:9px; letter-spacing:.24em; text-transform:uppercase; color:var(--muted); }
 
     /* ── CONTAINER SCROLL — 3D tilt reveal ── */
     .container-scroll-section {
@@ -444,7 +495,10 @@
       nav { padding:18px 32px; }
       nav.scrolled { padding:12px 32px; }
       section { padding:80px 32px; }
-      .hero { padding:0 32px; }
+      .hero { padding:0 40px; }
+      .hero-inner { grid-template-columns:1fr 360px; gap:52px; }
+      .hero-visual { height:480px; }
+      .hero-vtxt { display:none; }
       .container-scroll-section { padding:0 24px 60px; }
       .cs-card img { height:420px; }
       .about-grid,.exp-grid { grid-template-columns:1fr; gap:48px; }
@@ -461,13 +515,20 @@
       /* Hide pill shapes — prevent horizontal overflow */
       .hero-shape { display:none !important; }
       section { padding:60px 20px; }
-      .hero { padding:20px 20px 40px; min-height:80vh; }
-      .hero-inner { padding-top:80px; }
-      .hero h1 { font-size:clamp(36px,9vw,56px); }
-      .hero-desc { font-size:14px; }
-      .hero-features { gap:8px 16px; }
-      .hero-ctas { flex-direction:column; gap:12px; width:100%; }
+      .hero { padding:100px 20px 48px; min-height:auto; }
+      .hero-inner { grid-template-columns:1fr; gap:32px; padding-top:0; }
+      .hero h1 { font-size:clamp(40px,10vw,58px); }
+      .h1-l2 { padding-left:20px; }
+      .h1-l3 { padding-left:40px; }
+      .hero-visual { height:280px; }
+      .hero-visual::before { display:none; }
+      .hero-vtxt,.hero-year-badge { display:none; }
+      .hero-visual-overlay { background:linear-gradient(to bottom, rgba(10,9,8,.5) 0%, transparent 40%); }
+      .hero-desc { font-size:14px; max-width:100%; }
+      .hero-ctas { flex-direction:column; gap:10px; }
       .hero-ctas .btn-reserve, .hero-ctas .btn-ghost { width:100%; justify-content:center; }
+      .hero-stats { gap:0; }
+      .hs-item + .hs-item { border-left:none; padding-left:0; border-top:1px solid rgba(196,151,58,.1); padding-top:16px; margin-top:16px; }
       .hero-scroll-ind { display:none; }
       /* ContainerScroll mobile */
       .container-scroll-section { padding:0 16px 40px; }
@@ -547,27 +608,53 @@
       <div class="hero-shape hs5"><div class="hs-inner"></div></div>
     </div>
     <div class="hero-inner">
-      <div class="hero-eyebrow">Kuwait's First Russian Restaurant</div>
-      <h1>
-        <span class="h1-line">Savor Every Bite</span>
-        <span class="h1-line">of <em>Russia</em></span>
-        <span class="h1-line">in Kuwait</span>
-      </h1>
-      <p class="hero-desc">From hand-rolled Pelmeni to slow-simmered Borscht — authentic Russian and post-Soviet cuisine, crafted with love, served with soul.</p>
-      <div class="hero-features">
-        <div class="hf-item"><div class="hf-dot"></div><span>50+ Traditional Dishes</span></div>
-        <div class="hf-item"><div class="hf-dot"></div><span>6 Regional Cuisines</span></div>
-        <div class="hf-item"><div class="hf-dot"></div><span>5-Star Rated</span></div>
+
+      <!-- LEFT — editorial text -->
+      <div class="hero-left">
+        <div class="hero-eyebrow">Kuwait's Only Russian Restaurant</div>
+        <h1>
+          <span class="h1-line h1-l1">A Taste</span>
+          <span class="h1-line h1-l2">of Russia</span>
+          <span class="h1-line h1-l3">in Kuwait</span>
+        </h1>
+        <div class="hero-rule"></div>
+        <p class="hero-desc">From hand-rolled Pelmeni to slow-simmered Borscht — authentic flavors of Russia, Georgia and Ukraine, crafted with love and served with soul.</p>
+        <div class="hero-ctas">
+          <a href="#menu" class="btn-reserve">Explore Menu</a>
+          <a href="#reservation" class="btn-ghost">Reserve a Table</a>
+        </div>
+        <div class="hero-stats">
+          <div class="hs-item">
+            <span class="hs-num">50+</span>
+            <span class="hs-lbl">Authentic Dishes</span>
+          </div>
+          <div class="hs-item">
+            <span class="hs-num">6</span>
+            <span class="hs-lbl">Regional Cuisines</span>
+          </div>
+          <div class="hs-item">
+            <span class="hs-num">5★</span>
+            <span class="hs-lbl">Guest Rating</span>
+          </div>
+        </div>
       </div>
-      <div class="hero-ctas">
-        <a href="#menu" class="btn-reserve">Explore Menu</a>
-        <a href="#reservation" class="btn-ghost">Book a Table</a>
+
+      <!-- RIGHT — visual panel -->
+      <div class="hero-visual" id="heroVisual">
+        <img class="hero-visual-img" src="https://images.unsplash.com/photo-1547592166-23ac45744acd?w=800&q=88" alt="Borscht — Masha Restaurant" />
+        <div class="hero-visual-overlay"></div>
+        <div class="hero-year-badge" id="heroBadge">
+          <span class="hyb-num">2024</span>
+          <span class="hyb-lbl">Est. Kuwait</span>
+        </div>
+        <span class="hero-vtxt">Authentic Russian Cuisine</span>
       </div>
+
     </div>
 
     <!-- Scroll indicator -->
     <div class="hero-scroll-ind" id="scrollInd">
-      <div class="scroll-mouse"><div class="scroll-wheel"></div></div>
+      <div class="scroll-line"></div>
       <span class="scroll-label">Scroll</span>
     </div>
   </section>
@@ -894,23 +981,29 @@
     });
 
     /* ─── HERO ENTRANCE ─── */
-    gsap.set('.hero-eyebrow', { opacity:0, y:20 });
-    gsap.set('.h1-line', { opacity:0, y:64 });
-    gsap.set('.hero-desc', { opacity:0, y:20 });
-    gsap.set('.hero-features', { opacity:0, y:16 });
-    gsap.set('.hero-ctas', { opacity:0, y:16 });
-    gsap.set('#scrollInd', { opacity:0 });
-    gsap.set('#csCard', { opacity:0 });
+    gsap.set('.hero-eyebrow', { opacity:0, x:-20 });
+    gsap.set('.h1-line',      { opacity:0, y:56, skewY:2 });
+    gsap.set('.hero-rule',    { opacity:0, scaleX:0, transformOrigin:'left center' });
+    gsap.set('.hero-desc',    { opacity:0, y:18 });
+    gsap.set('.hero-ctas',    { opacity:0, y:16 });
+    gsap.set('.hs-item',      { opacity:0, y:20 });
+    gsap.set('#heroVisual',   { opacity:0, x:50, scale:.96 });
+    gsap.set('#heroBadge',    { opacity:0, x:-24 });
+    gsap.set('#scrollInd',    { opacity:0 });
+    gsap.set('#csCard',       { opacity:0 });
 
-    const heroTl = gsap.timeline({ delay:.1 });
+    const heroTl = gsap.timeline({ delay:.12 });
     heroTl
-      .to('.hero-eyebrow',  { opacity:1, y:0, duration:.65, ease:'power3.out' }, 0)
-      .to('.h1-line',       { opacity:1, y:0, duration:.8, stagger:.13, ease:'power3.out' }, .15)
-      .to('.hero-desc',     { opacity:1, y:0, duration:.65, ease:'power2.out' }, .6)
-      .to('.hero-features', { opacity:1, y:0, duration:.55, ease:'power2.out' }, .78)
-      .to('.hero-ctas',     { opacity:1, y:0, duration:.55, ease:'power2.out' }, .92)
-      .to('#scrollInd',     { opacity:1, duration:.5 }, 1.3)
-      .to('#csCard',        { opacity:1, duration:.8, ease:'power2.out' }, .4);
+      .to('.hero-eyebrow', { opacity:1, x:0, duration:.65, ease:'power3.out' }, 0)
+      .to('.h1-line',      { opacity:1, y:0, skewY:0, duration:.9, stagger:.12, ease:'power3.out' }, .15)
+      .to('.hero-rule',    { opacity:1, scaleX:1, duration:.7, ease:'power2.out' }, .55)
+      .to('.hero-desc',    { opacity:1, y:0, duration:.65, ease:'power2.out' }, .65)
+      .to('.hero-ctas',    { opacity:1, y:0, duration:.6, ease:'power2.out' }, .82)
+      .to('.hs-item',      { opacity:1, y:0, duration:.55, stagger:.09, ease:'power2.out' }, .96)
+      .to('#heroVisual',   { opacity:1, x:0, scale:1, duration:1.15, ease:'power3.out' }, .18)
+      .to('#heroBadge',    { opacity:1, x:0, duration:.7, ease:'back.out(1.8)' }, .95)
+      .to('#scrollInd',    { opacity:1, duration:.5 }, 1.5)
+      .to('#csCard',       { opacity:1, duration:.9, ease:'power2.out' }, .45);
 
     /* ─── STICKY NAV ─── */
     window.addEventListener('scroll', () => {
