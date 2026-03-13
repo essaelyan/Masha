@@ -144,7 +144,7 @@
     /* cycling word */
     .cycle-word {
       display:inline-block; font-style:italic; font-weight:400; color:var(--gold-lt);
-      transition:transform 0.5s cubic-bezier(0.34,1.56,0.64,1), opacity 0.35s ease;
+      transition:transform 0.5s cubic-bezier(0.34,1.56,0.64,1), opacity 0.35s ease, color 0.4s ease;
       will-change:transform,opacity;
     }
     .cycle-word.anim-out {
@@ -976,7 +976,8 @@
 
     /* ─── CYCLING HERO WORD ─── */
     (function() {
-      const words = ['Russia', 'Georgia', 'Ukraine', 'Kazakhstan'];
+      const words  = ['Russia',   'Georgia',  'Ukraine',  'Kazakhstan'];
+      const colors = ['#e0b86a',  '#f2ddd0',  '#a8c4b0',  '#d4b896'];
       let idx = 0;
       const el = document.getElementById('cycleWord');
       if (!el) return;
@@ -985,6 +986,7 @@
         el.classList.add('anim-out');
         setTimeout(() => {
           el.textContent = words[idx];
+          el.style.color  = colors[idx];
           el.classList.remove('anim-out');
           el.classList.add('anim-in');
           el.offsetHeight; // force reflow
