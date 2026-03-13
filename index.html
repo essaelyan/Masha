@@ -81,20 +81,20 @@
     .nav-links a:hover { color:var(--cream); }
     .nav-links a:hover::after { width:100%; }
     .btn-reserve {
-      font-size:10.5px; font-weight:700; letter-spacing:.18em; text-transform:uppercase;
-      padding:18px 48px; min-width:180px; background:var(--gold); color:var(--bg);
+      font-size:10px; font-weight:700; letter-spacing:.18em; text-transform:uppercase;
+      padding:13px 28px; background:var(--gold); color:var(--bg);
       border:none; cursor:pointer; text-decoration:none; display:inline-flex;
-      align-items:center; justify-content:center; gap:8px;
+      align-items:center; gap:8px;
       transition:background .2s ease, transform .15s ease, box-shadow .2s ease;
       box-shadow:0 4px 20px rgba(196,151,58,.28);
     }
     .btn-reserve:hover { background:var(--gold-lt); transform:translateY(-1px); box-shadow:0 8px 28px rgba(196,151,58,.38); }
     .btn-reserve:active { transform:translateY(0); }
     .btn-ghost {
-      font-size:10.5px; font-weight:600; letter-spacing:.16em; text-transform:uppercase;
-      padding:18px 48px; min-width:180px; border:1px solid rgba(242,234,216,.22);
+      font-size:10px; font-weight:600; letter-spacing:.16em; text-transform:uppercase;
+      padding:14px 34px; border:1px solid rgba(242,234,216,.22);
       color:var(--cream); text-decoration:none; display:inline-flex;
-      align-items:center; justify-content:center; gap:8px;
+      align-items:center; gap:8px;
       transition:border-color .25s ease, color .25s ease, background .25s ease, transform .15s ease;
     }
     .btn-ghost:hover { border-color:rgba(196,151,58,.5); color:var(--gold-lt); background:rgba(196,151,58,.05); transform:translateY(-1px); }
@@ -120,8 +120,8 @@
     }
     .hero-inner {
       position:relative; z-index:2;
-      width:100%; max-width:1100px; margin:0 auto;
-      display:flex; flex-direction:column; align-items:center; text-align:center;
+      width:100%; max-width:920px; margin:0 auto;
+      display:flex; flex-direction:column; align-items:flex-start;
       padding-top:72px;
     }
     /* eyebrow */
@@ -130,18 +130,18 @@
       font-size:9.5px; font-weight:700; letter-spacing:.32em; text-transform:uppercase;
       color:var(--gold); margin-bottom:40px; opacity:.9;
     }
-    .hero-eyebrow::before,
-    .hero-eyebrow::after { content:''; width:36px; height:1px; background:var(--gold); display:block; }
-    /* heading */
+    .hero-eyebrow::before { content:''; width:36px; height:1px; background:var(--gold); display:block; }
+    /* staggered heading — large display */
     .hero h1 {
       font-size:clamp(60px,7.2vw,104px); font-weight:700;
       line-height:1.0; letter-spacing:-0.04em;
       color:var(--cream); margin-bottom:56px;
     }
     .h1-line { display:block; }
-    .h1-l3 { font-style:italic; font-weight:400; color:var(--gold-lt); }
-    /* CTAs — velvet proportions */
-    .hero-ctas { display:flex; gap:16px; align-items:center; justify-content:center; }
+    .h1-l2 { padding-left:clamp(40px,4vw,64px); }
+    .h1-l3 { padding-left:clamp(80px,8vw,128px); font-style:italic; font-weight:400; color:var(--gold-lt); }
+    /* CTAs */
+    .hero-ctas { display:flex; gap:16px; align-items:center; }
     /* scroll indicator */
     .hero-scroll-ind {
       position:absolute; bottom:32px; left:64px;
@@ -443,11 +443,12 @@
       /* Hide pill shapes — prevent horizontal overflow */
       .hero-shape { display:none !important; }
       section { padding:60px 20px; }
-      .hero { padding:96px 24px 40px; min-height:unset; }
+      .hero { padding:120px 24px 60px; min-height:auto; }
       .hero-inner { padding-top:0; }
-      .hero h1 { font-size:clamp(38px,9.5vw,54px); margin-bottom:36px; }
-      .hero-eyebrow { margin-bottom:28px; }
-      .hero-ctas { flex-direction:column; gap:10px; width:100%; }
+      .hero h1 { font-size:clamp(40px,10vw,58px); }
+      .h1-l2 { padding-left:20px; }
+      .h1-l3 { padding-left:40px; }
+      .hero-ctas { flex-direction:column; gap:10px; }
       .hero-ctas .btn-reserve, .hero-ctas .btn-ghost { width:100%; min-width:unset; }
       .hero-scroll-ind { display:none; }
       /* ContainerScroll mobile */
@@ -496,7 +497,6 @@
       <span class="nav-logo-sub">Russian Cuisine · Kuwait</span>
     </a>
     <ul class="nav-links">
-      <li><a href="#about">About</a></li>
       <li><a href="#menu">Menu</a></li>
       <li><a href="#experience">Experience</a></li>
       <li><a href="#gallery">Gallery</a></li>
@@ -510,7 +510,6 @@
 
   <!-- ── MOBILE MENU ── -->
   <div class="nav-mobile-menu" id="mobileMenu">
-    <a href="#about" class="mobile-link">About</a>
     <a href="#menu" class="mobile-link">Menu</a>
     <a href="#experience" class="mobile-link">Experience</a>
     <a href="#gallery" class="mobile-link">Gallery</a>
@@ -598,30 +597,6 @@
       <span class="mq-sep">✦</span>
     </div>
   </div>
-
-  <!-- ── ABOUT ── -->
-  <section class="about" id="about">
-    <div class="about-grid">
-      <div class="about-img-wrap">
-        <img src="https://images.unsplash.com/photo-1600891964092-4316c288032e?w=800&q=85" alt="Fine dining — Masha Restaurant" />
-        <div class="about-img-overlay"></div>
-        <div class="about-badge"><span class="num">#1</span><span class="lbl">Russian<br/>in Kuwait</span></div>
-      </div>
-      <div class="about-text">
-        <div class="section-label">Our Story</div>
-        <h2>A Taste of Russia,<br/><em>Heart of Kuwait</em></h2>
-        <div class="gold-divider"></div>
-        <p>Masha is Kuwait's first authentic Russian restaurant — and the only place in the Gulf where you can discover the soul of Russian and post-Soviet cuisine, from Siberian Pelmeni to Georgian Khachapuri, all under one roof.</p>
-        <p>Every recipe is rooted in tradition: Borscht simmered low and slow, Manti steamed to order, Medovik layered by hand, and Kompot brewed from mixed fruits. Real food, made with love.</p>
-        <div class="about-stats">
-          <div><div class="stat-num" data-target="50">50+</div><div class="stat-lbl">Authentic Russian Dishes</div></div>
-          <div><div class="stat-num">5★</div><div class="stat-lbl">Rated by Our Guests</div></div>
-          <div><div class="stat-num" data-target="100">100%</div><div class="stat-lbl">Authentic Ingredients</div></div>
-          <div><div class="stat-num">∞</div><div class="stat-lbl">Memories Created</div></div>
-        </div>
-      </div>
-    </div>
-  </section>
 
   <!-- ── MENU ── -->
   <section class="menu-section" id="menu">
