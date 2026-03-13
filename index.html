@@ -103,10 +103,10 @@
 
     /* ── HERO — minimal centered ── */
     .hero {
-      position:relative; z-index:2; min-height:80vh;
+      position:relative; min-height:80vh;
       display:flex; align-items:center; justify-content:center;
       padding:0 64px; overflow:hidden;
-      background:transparent;
+      background:var(--bg);
     }
     .hero-ambient { position:absolute; inset:0; pointer-events:none; }
     .hero-ambient::before {
@@ -144,7 +144,7 @@
     .h1-l3 { padding-left:clamp(80px,8vw,128px); font-style:italic; font-weight:400; color:var(--gold-lt); }
     /* shader background */
     #shader-bg {
-      position:fixed; inset:0; z-index:1; overflow:hidden; pointer-events:none;
+      position:absolute; inset:0; z-index:1; overflow:hidden; pointer-events:none;
       mix-blend-mode:screen; opacity:0.28;
     }
     #shader-bg canvas { display:block; width:100% !important; height:100% !important; }
@@ -880,17 +880,6 @@
       .to('.hero-ctas',    { opacity:1, y:0, duration:.6, ease:'power2.out' }, .72)
       .to('#scrollInd',    { opacity:1, duration:.5 }, 1.2)
       .to('#csCard',       { opacity:1, duration:.9, ease:'power2.out' }, .45);
-
-    /* ─── SHADER FADE ON SCROLL ─── */
-    gsap.to('#shader-bg', {
-      opacity: 0, ease: 'none',
-      scrollTrigger: {
-        trigger: '.hero',
-        start: 'center top',
-        end: 'bottom+=120 top',
-        scrub: 1.2
-      }
-    });
 
     /* ─── STICKY NAV ─── */
     window.addEventListener('scroll', () => {
