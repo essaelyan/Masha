@@ -432,65 +432,77 @@
     .nav-mobile-menu.open { display:flex; }
     .nav-mobile-menu a {
       font-size:22px; font-weight:500; letter-spacing:.1em; text-transform:uppercase;
-      color:var(--cream); text-decoration:none;
-      transition:color .2s ease;
+      color:var(--cream); text-decoration:none; transition:color .2s ease;
     }
     .nav-mobile-menu a:hover { color:var(--gold); }
     .nav-mobile-menu .btn-reserve { font-size:13px; margin-top:12px; }
 
     /* ── RESPONSIVE ── */
+    /* TABLET: shrink but keep 2-column split exactly like desktop */
     @media (max-width:1100px) {
       nav { padding:20px 32px; }
       section { padding:80px 32px; }
       .hero { padding:0 32px; }
-      .hero-inner { grid-template-columns:1fr; gap:0; padding-top:100px; text-align:center; }
-      .hero-left { display:flex; flex-direction:column; align-items:center; }
-      .hero-eyebrow { justify-content:center; }
-      .hero-desc { text-align:center; }
-      .hero-features { align-items:center; }
-      .hero-ctas { justify-content:center; }
-      /* Show hero image as a smaller centered visual under the text */
-      .hero-right {
-        display:flex; justify-content:center; padding:40px 0 60px;
-      }
-      .hero-img-orbit { width:280px; height:280px; }
-      .badge-1 { top:6%; left:-8%; }
-      .badge-2 { bottom:10%; right:-8%; }
-      .float-badge { padding:8px 12px; }
-      .fb-icon { width:28px; height:28px; font-size:14px; }
-      .fb-name { font-size:12px; }
-      .fb-tag { font-size:9px; }
+      .hero-inner { grid-template-columns:1.05fr 0.95fr; gap:40px; padding-top:100px; }
+      .hero-img-orbit { width:340px; height:340px; }
+      .badge-1 { top:8%; left:-5%; }
+      .badge-2 { bottom:12%; right:-5%; }
       .about-grid,.exp-grid { grid-template-columns:1fr; gap:48px; }
-      .about-img-wrap img { height:380px; }
+      .about-img-wrap img { height:400px; }
       .menu-grid { grid-template-columns:1fr 1fr; }
       .footer-grid { grid-template-columns:1fr 1fr; gap:40px; }
     }
+    /* MOBILE: single column, but keep same LEFT-aligned feel as desktop */
     @media (max-width:768px) {
       nav { padding:16px 20px; }
       .nav-links { display:none; }
       .nav-hamburger { display:flex; }
       nav > .btn-reserve { display:none; }
-      section { padding:64px 20px; }
-      .hero { padding:0 20px; }
-      .hero h1 { font-size:clamp(36px,9vw,52px); }
-      .hero-img-orbit { width:220px; height:220px; }
-      .badge-1 { top:4%; left:-4%; }
-      .badge-2 { bottom:8%; right:-4%; }
-      .about-img-wrap img { height:280px; }
-      .about-badge { width:90px; height:90px; bottom:-16px; right:-10px; }
-      .about-badge .num { font-size:26px; }
-      .about-stats { grid-template-columns:1fr 1fr; }
-      .res-form { grid-template-columns:1fr; }
-      .footer-grid { grid-template-columns:1fr; gap:32px; }
-      .footer-bottom { flex-direction:column; gap:8px; text-align:center; }
-      .menu-tabs { overflow-x:auto; }
-      .menu-grid { grid-template-columns:1fr; }
-      .gallery-grid { grid-template-columns:1fr 1fr; grid-template-rows:auto; }
-      .gallery-grid .gallery-item { height:180px; }
-      .gallery-item:nth-child(1),.gallery-item:nth-child(5) { grid-column:span 1; }
+      section { padding:60px 20px; }
+      .hero { padding:0 20px; min-height:auto; padding-top:80px; padding-bottom:48px; }
+      .hero-inner { grid-template-columns:1fr; gap:0; padding-top:90px; }
+      /* Left-aligned like desktop — NOT centered */
+      .hero h1 { font-size:clamp(34px,8.5vw,50px); }
+      .hero-desc { max-width:100%; }
+      /* Hero image: compact, below text */
+      .hero-right { display:flex; justify-content:flex-start; padding:36px 0 16px; }
+      .hero-img-orbit { width:200px; height:200px; }
+      .badge-1 { top:4%; left:-2%; }
+      .badge-2 { bottom:6%; right:-2%; }
+      .float-badge { padding:7px 10px; gap:8px; }
+      .fb-icon { width:24px; height:24px; font-size:12px; }
+      .fb-name { font-size:11px; }
+      .fb-tag { font-size:9px; }
+      /* About */
+      .about-img-wrap img { height:260px; }
+      .about-img-wrap::before { display:none; }
+      .about-badge { width:80px; height:80px; bottom:-12px; right:-8px; }
+      .about-badge .num { font-size:22px; }
+      .about-stats { grid-template-columns:1fr 1fr; gap:16px; }
+      .stat-num { font-size:30px; }
+      /* Menu */
+      .menu-header { flex-direction:column; gap:20px; align-items:flex-start; }
+      .menu-tabs { overflow-x:auto; white-space:nowrap; }
+      .menu-grid { grid-template-columns:1fr; gap:3px; }
+      .menu-card img { height:260px; }
+      /* Experience */
       .exp-images { grid-template-columns:1fr; }
       .exp-img:first-child { grid-column:span 1; }
       .exp-img img, .exp-img:first-child img { height:200px; }
+      /* Reservation */
+      .reservation-section { padding:80px 20px; }
+      .res-form { grid-template-columns:1fr; gap:8px; }
+      /* Gallery */
+      .gallery-grid {
+        grid-template-columns:1fr 1fr;
+        grid-template-rows:auto;
+      }
+      .gallery-grid .gallery-item { height:160px; }
+      .gallery-item:nth-child(1),.gallery-item:nth-child(5) { grid-column:span 2; height:220px; }
+      /* Footer */
+      .footer-grid { grid-template-columns:1fr; gap:32px; }
+      .footer-bottom { flex-direction:column; gap:6px; text-align:center; }
+      footer { padding:60px 20px 32px; }
     }
   </style>
 </head>
@@ -890,11 +902,11 @@
 
     /* ─── ABOUT SECTION ─── */
     gsap.from('.about-img-wrap', {
-      scrollTrigger:{ trigger:'.about-img-wrap', start:'top 82%' },
+      scrollTrigger:{ trigger:'.about-img-wrap', start:'top 90%', once:true },
       opacity:0, x:-60, duration:1, ease:'power3.out'
     });
     gsap.from('.about-text', {
-      scrollTrigger:{ trigger:'.about-text', start:'top 82%' },
+      scrollTrigger:{ trigger:'.about-text', start:'top 90%', once:true },
       opacity:0, x:60, duration:1, ease:'power3.out'
     });
 
@@ -905,7 +917,7 @@
       gsap.fromTo(el,
         { textContent:0 },
         { textContent:target, duration:1.8, ease:'power2.out', snap:{ textContent:1 },
-          scrollTrigger:{ trigger:el, start:'top 85%' },
+          scrollTrigger:{ trigger:el, start:'top 90%', once:true },
           onUpdate(){ el.textContent = Math.round(+el.textContent) + suffix; }
         }
       );
@@ -914,7 +926,7 @@
     /* ─── SECTION LABELS ─── */
     gsap.utils.toArray('.section-label').forEach(el => {
       gsap.from(el, {
-        scrollTrigger:{ trigger:el, start:'top 88%' },
+        scrollTrigger:{ trigger:el, start:'top 92%', once:true },
         opacity:0, x:-24, duration:.6, ease:'power2.out'
       });
     });
@@ -924,42 +936,42 @@
     /* ─── MENU CARDS ─── */
     gsap.utils.toArray('#tab-starters .menu-card').forEach((card, i) => {
       gsap.from(card, {
-        scrollTrigger:{ trigger:card, start:'top 90%' },
+        scrollTrigger:{ trigger:card, start:'top 95%', once:true },
         opacity:0, y:40, scale:.96, duration:.7, delay:i*.1, ease:'power3.out'
       });
     });
 
     /* ─── EXPERIENCE ─── */
     gsap.from('.exp-text', {
-      scrollTrigger:{ trigger:'.exp-text', start:'top 82%' },
+      scrollTrigger:{ trigger:'.exp-text', start:'top 90%', once:true },
       opacity:0, x:-50, duration:.9, ease:'power3.out'
     });
     gsap.from('.exp-images .exp-img', {
-      scrollTrigger:{ trigger:'.exp-images', start:'top 82%' },
+      scrollTrigger:{ trigger:'.exp-images', start:'top 90%', once:true },
       opacity:0, y:40, stagger:.14, duration:.7, ease:'power3.out'
     });
 
     /* ─── RESERVATION ─── */
     gsap.from('.res-content', {
-      scrollTrigger:{ trigger:'.res-content', start:'top 80%' },
+      scrollTrigger:{ trigger:'.res-content', start:'top 90%', once:true },
       opacity:0, y:40, duration:.9, ease:'power3.out'
     });
 
     /* ─── GALLERY ─── */
     gsap.from('.gallery-header', {
-      scrollTrigger:{ trigger:'.gallery-header', start:'top 85%' },
+      scrollTrigger:{ trigger:'.gallery-header', start:'top 90%', once:true },
       opacity:0, y:30, duration:.7, ease:'power2.out'
     });
     gsap.utils.toArray('.gallery-item').forEach((item, i) => {
       gsap.from(item, {
-        scrollTrigger:{ trigger:item, start:'top 92%' },
+        scrollTrigger:{ trigger:item, start:'top 95%', once:true },
         opacity:0, scale:.92, duration:.65, delay:(i%4)*.07, ease:'power2.out'
       });
     });
 
     /* ─── FOOTER ─── */
     gsap.from('.footer-grid > div', {
-      scrollTrigger:{ trigger:'.footer-grid', start:'top 88%' },
+      scrollTrigger:{ trigger:'.footer-grid', start:'top 92%', once:true },
       opacity:0, y:28, stagger:.1, duration:.65, ease:'power2.out'
     });
 
