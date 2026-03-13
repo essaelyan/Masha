@@ -120,8 +120,8 @@
     }
     .hero-inner {
       position:relative; z-index:2;
-      width:100%; max-width:920px; margin:0 auto;
-      display:flex; flex-direction:column; align-items:flex-start;
+      width:100%; max-width:1100px; margin:0 auto;
+      display:flex; flex-direction:column; align-items:center; text-align:center;
       padding-top:72px;
     }
     /* eyebrow */
@@ -130,18 +130,18 @@
       font-size:9.5px; font-weight:700; letter-spacing:.32em; text-transform:uppercase;
       color:var(--gold); margin-bottom:40px; opacity:.9;
     }
-    .hero-eyebrow::before { content:''; width:36px; height:1px; background:var(--gold); display:block; }
-    /* staggered heading — large display */
+    .hero-eyebrow::before,
+    .hero-eyebrow::after { content:''; width:36px; height:1px; background:var(--gold); display:block; }
+    /* heading */
     .hero h1 {
       font-size:clamp(60px,7.2vw,104px); font-weight:700;
       line-height:1.0; letter-spacing:-0.04em;
       color:var(--cream); margin-bottom:56px;
     }
     .h1-line { display:block; }
-    .h1-l2 { padding-left:clamp(40px,4vw,64px); }
-    .h1-l3 { padding-left:clamp(80px,8vw,128px); font-style:italic; font-weight:400; color:var(--gold-lt); }
+    .h1-l3 { font-style:italic; font-weight:400; color:var(--gold-lt); }
     /* CTAs — velvet proportions */
-    .hero-ctas { display:flex; gap:16px; align-items:center; }
+    .hero-ctas { display:flex; gap:16px; align-items:center; justify-content:center; }
     /* scroll indicator */
     .hero-scroll-ind {
       position:absolute; bottom:32px; left:64px;
@@ -443,12 +443,11 @@
       /* Hide pill shapes — prevent horizontal overflow */
       .hero-shape { display:none !important; }
       section { padding:60px 20px; }
-      .hero { padding:120px 24px 60px; min-height:auto; }
+      .hero { padding:96px 24px 40px; min-height:unset; }
       .hero-inner { padding-top:0; }
-      .hero h1 { font-size:clamp(40px,10vw,58px); }
-      .h1-l2 { padding-left:20px; }
-      .h1-l3 { padding-left:40px; }
-      .hero-ctas { flex-direction:column; gap:10px; }
+      .hero h1 { font-size:clamp(38px,9.5vw,54px); margin-bottom:36px; }
+      .hero-eyebrow { margin-bottom:28px; }
+      .hero-ctas { flex-direction:column; gap:10px; width:100%; }
       .hero-ctas .btn-reserve, .hero-ctas .btn-ghost { width:100%; min-width:unset; }
       .hero-scroll-ind { display:none; }
       /* ContainerScroll mobile */
