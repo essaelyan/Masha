@@ -120,8 +120,8 @@
     }
     .hero-inner {
       position:relative; z-index:2;
-      width:100%; max-width:920px; margin:0 auto;
-      display:flex; flex-direction:column; align-items:flex-start;
+      width:100%; max-width:1100px; margin:0 auto;
+      display:flex; flex-direction:column; align-items:center; text-align:center;
       padding-top:72px;
     }
     /* eyebrow */
@@ -130,18 +130,19 @@
       font-size:9.5px; font-weight:700; letter-spacing:.32em; text-transform:uppercase;
       color:var(--gold); margin-bottom:40px; opacity:.9;
     }
-    .hero-eyebrow::before { content:''; width:36px; height:1px; background:var(--gold); display:block; }
-    /* staggered heading — large display */
+    .hero-eyebrow::before,
+    .hero-eyebrow::after { content:''; width:36px; height:1px; background:var(--gold); display:block; }
+    /* staggered heading — centered block */
     .hero h1 {
       font-size:clamp(60px,7.2vw,104px); font-weight:700;
       line-height:1.0; letter-spacing:-0.04em;
-      color:var(--cream); margin-bottom:56px;
+      color:var(--cream); margin-bottom:56px; text-align:left;
     }
     .h1-line { display:block; }
     .h1-l2 { padding-left:clamp(40px,4vw,64px); }
     .h1-l3 { padding-left:clamp(80px,8vw,128px); font-style:italic; font-weight:400; color:var(--gold-lt); }
     /* CTAs */
-    .hero-ctas { display:flex; gap:16px; align-items:center; }
+    .hero-ctas { display:flex; gap:16px; align-items:center; justify-content:center; }
     /* scroll indicator */
     .hero-scroll-ind {
       position:absolute; bottom:32px; left:64px;
@@ -445,9 +446,9 @@
       section { padding:60px 20px; }
       .hero { padding:120px 24px 60px; min-height:auto; }
       .hero-inner { padding-top:0; }
-      .hero h1 { font-size:clamp(40px,10vw,58px); }
-      .h1-l2 { padding-left:20px; }
-      .h1-l3 { padding-left:40px; }
+      .hero h1 { font-size:clamp(36px,9vw,54px); text-align:left; }
+      .h1-l2 { padding-left:18px; }
+      .h1-l3 { padding-left:36px; }
       .hero-ctas { flex-direction:column; gap:10px; }
       .hero-ctas .btn-reserve, .hero-ctas .btn-ghost { width:100%; min-width:unset; }
       .hero-scroll-ind { display:none; }
@@ -529,8 +530,8 @@
     <div class="hero-inner">
       <div class="hero-eyebrow">Kuwait's Only Russian Restaurant</div>
       <h1>
-        <span class="h1-line h1-l1">A Taste</span>
-        <span class="h1-line h1-l2">of Russia</span>
+        <span class="h1-line h1-l1">Savor Every Bite</span>
+        <span class="h1-line h1-l2">of <em>Russia</em></span>
         <span class="h1-line h1-l3">in Kuwait</span>
       </h1>
       <div class="hero-ctas">
