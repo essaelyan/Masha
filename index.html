@@ -224,15 +224,14 @@
     /* ── BADGE MARQUEE ── */
     .badge-row {
       background:var(--surface);
-      border-top:1px solid rgba(196,151,58,.1);
-      border-bottom:1px solid rgba(196,151,58,.1);
-      padding:0;
+      border-top:1px solid rgba(196,151,58,.12);
+      border-bottom:1px solid rgba(196,151,58,.12);
       overflow:hidden;
       position:relative;
     }
     /* fade edges */
     .badge-row::before, .badge-row::after {
-      content:''; position:absolute; top:0; bottom:0; width:120px; z-index:2; pointer-events:none;
+      content:''; position:absolute; top:0; bottom:0; width:100px; z-index:2; pointer-events:none;
     }
     .badge-row::before { left:0; background:linear-gradient(to right, var(--surface) 0%, transparent 100%); }
     .badge-row::after  { right:0; background:linear-gradient(to left,  var(--surface) 0%, transparent 100%); }
@@ -240,18 +239,21 @@
     .marquee-track {
       display:flex; align-items:center;
       width:max-content;
-      animation:marqueeScroll 28s linear infinite;
-      padding:24px 0;
+      animation:marqueeScroll 30s linear infinite;
+      padding:18px 0;
     }
     .marquee-track:hover { animation-play-state:paused; }
     @keyframes marqueeScroll {
       from { transform:translateX(0); }
       to   { transform:translateX(-50%); }
     }
-    .badge-item { display:flex; align-items:center; gap:14px; padding:0 48px; white-space:nowrap; flex-shrink:0; }
-    .badge-icon { width:32px; height:32px; display:flex; align-items:center; justify-content:center; color:var(--gold); font-size:18px; }
-    .badge-label { font-size:13px; font-weight:500; color:rgba(242,234,216,.58); letter-spacing:.06em; text-transform:uppercase; }
-    .badge-divider { width:1px; height:28px; background:rgba(196,151,58,.2); flex-shrink:0; }
+    .mq-item {
+      font-size:11px; font-weight:600; letter-spacing:.22em; text-transform:uppercase;
+      color:rgba(242,234,216,.52); padding:0 28px; white-space:nowrap; flex-shrink:0;
+    }
+    .mq-sep {
+      color:var(--gold); font-size:10px; flex-shrink:0; opacity:.7;
+    }
 
     /* ── SECTION BASE ── */
     section { padding:120px 64px; }
@@ -408,29 +410,87 @@
     .footer-contact p span { color:var(--gold); font-size:15px; flex-shrink:0; margin-top:2px; }
     .footer-bottom { max-width:1280px; margin:0 auto; padding-top:32px; display:flex; align-items:center; justify-content:space-between; font-size:13px; color:var(--muted); }
 
+    /* ── HAMBURGER ── */
+    .nav-hamburger {
+      display:none; flex-direction:column; gap:5px; background:none; border:none;
+      cursor:pointer; padding:4px; z-index:300;
+    }
+    .nav-hamburger span {
+      display:block; width:24px; height:2px; background:var(--cream);
+      transition:transform .3s ease, opacity .3s ease;
+    }
+    .nav-hamburger.open span:nth-child(1) { transform:translateY(7px) rotate(45deg); }
+    .nav-hamburger.open span:nth-child(2) { opacity:0; }
+    .nav-hamburger.open span:nth-child(3) { transform:translateY(-7px) rotate(-45deg); }
+
+    /* mobile nav drawer */
+    .nav-mobile-menu {
+      display:none; position:fixed; top:0; left:0; right:0; bottom:0; z-index:250;
+      background:rgba(10,9,8,.97); flex-direction:column; align-items:center; justify-content:center;
+      gap:36px;
+    }
+    .nav-mobile-menu.open { display:flex; }
+    .nav-mobile-menu a {
+      font-size:22px; font-weight:500; letter-spacing:.1em; text-transform:uppercase;
+      color:var(--cream); text-decoration:none;
+      transition:color .2s ease;
+    }
+    .nav-mobile-menu a:hover { color:var(--gold); }
+    .nav-mobile-menu .btn-reserve { font-size:13px; margin-top:12px; }
+
     /* ── RESPONSIVE ── */
     @media (max-width:1100px) {
       nav { padding:20px 32px; }
       section { padding:80px 32px; }
       .hero { padding:0 32px; }
-      .hero-inner { grid-template-columns:1fr; gap:48px; padding-top:100px; }
-      .hero-right { display:none; }
+      .hero-inner { grid-template-columns:1fr; gap:0; padding-top:100px; text-align:center; }
+      .hero-left { display:flex; flex-direction:column; align-items:center; }
+      .hero-eyebrow { justify-content:center; }
+      .hero-desc { text-align:center; }
+      .hero-features { align-items:center; }
+      .hero-ctas { justify-content:center; }
+      /* Show hero image as a smaller centered visual under the text */
+      .hero-right {
+        display:flex; justify-content:center; padding:40px 0 60px;
+      }
+      .hero-img-orbit { width:280px; height:280px; }
+      .badge-1 { top:6%; left:-8%; }
+      .badge-2 { bottom:10%; right:-8%; }
+      .float-badge { padding:8px 12px; }
+      .fb-icon { width:28px; height:28px; font-size:14px; }
+      .fb-name { font-size:12px; }
+      .fb-tag { font-size:9px; }
       .about-grid,.exp-grid { grid-template-columns:1fr; gap:48px; }
+      .about-img-wrap img { height:380px; }
       .menu-grid { grid-template-columns:1fr 1fr; }
       .footer-grid { grid-template-columns:1fr 1fr; gap:40px; }
     }
     @media (max-width:768px) {
-      nav { padding:16px 24px; }
+      nav { padding:16px 20px; }
       .nav-links { display:none; }
-      section { padding:64px 24px; }
-      .hero { padding:0 24px; }
+      .nav-hamburger { display:flex; }
+      nav > .btn-reserve { display:none; }
+      section { padding:64px 20px; }
+      .hero { padding:0 20px; }
+      .hero h1 { font-size:clamp(36px,9vw,52px); }
+      .hero-img-orbit { width:220px; height:220px; }
+      .badge-1 { top:4%; left:-4%; }
+      .badge-2 { bottom:8%; right:-4%; }
+      .about-img-wrap img { height:280px; }
+      .about-badge { width:90px; height:90px; bottom:-16px; right:-10px; }
+      .about-badge .num { font-size:26px; }
+      .about-stats { grid-template-columns:1fr 1fr; }
       .res-form { grid-template-columns:1fr; }
-      .footer-grid { grid-template-columns:1fr; }
-      .badge-row { flex-wrap:wrap; gap:20px; padding:20px; }
-      .badge-divider { display:none; }
+      .footer-grid { grid-template-columns:1fr; gap:32px; }
+      .footer-bottom { flex-direction:column; gap:8px; text-align:center; }
+      .menu-tabs { overflow-x:auto; }
       .menu-grid { grid-template-columns:1fr; }
       .gallery-grid { grid-template-columns:1fr 1fr; grid-template-rows:auto; }
+      .gallery-grid .gallery-item { height:180px; }
       .gallery-item:nth-child(1),.gallery-item:nth-child(5) { grid-column:span 1; }
+      .exp-images { grid-template-columns:1fr; }
+      .exp-img:first-child { grid-column:span 1; }
+      .exp-img img, .exp-img:first-child img { height:200px; }
     }
   </style>
 </head>
@@ -447,7 +507,20 @@
       <li><a href="#contact">Contact</a></li>
     </ul>
     <a href="#reservation" class="btn-reserve">Reserve a Table</a>
+    <button class="nav-hamburger" id="hamburger" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
   </nav>
+
+  <!-- ── MOBILE MENU ── -->
+  <div class="nav-mobile-menu" id="mobileMenu">
+    <a href="#about" class="mobile-link">About</a>
+    <a href="#menu" class="mobile-link">Menu</a>
+    <a href="#experience" class="mobile-link">Experience</a>
+    <a href="#gallery" class="mobile-link">Gallery</a>
+    <a href="#contact" class="mobile-link">Contact</a>
+    <a href="#reservation" class="btn-reserve mobile-link">Reserve a Table</a>
+  </div>
 
   <!-- ── HERO ── -->
   <section class="hero" id="home">
@@ -488,7 +561,7 @@
         <div class="hero-img-orbit" id="heroOrbit">
           <div class="hero-img-glow"></div>
           <div class="hero-img-circle">
-            <img src="https://images.unsplash.com/photo-U9DW1GGTTXw?w=700&q=85" alt="Borscht — Masha Restaurant" onerror="this.src='https://images.unsplash.com/photo-1547592166-23ac45744acd?w=700&q=85'" />
+            <img src="https://images.unsplash.com/photo-1547592166-23ac45744acd?w=700&q=85" alt="Borscht — Masha Restaurant" />
           </div>
           <div class="float-badge badge-1" id="badge1">
             <div class="fb-icon">🥟</div>
@@ -513,35 +586,39 @@
   <div class="badge-row" aria-hidden="true">
     <div class="marquee-track">
       <!-- SET 1 -->
-      <div class="badge-item"><div class="badge-icon">✦</div><span class="badge-label">Authentic Russian Recipes</span></div>
-      <div class="badge-divider"></div>
-      <div class="badge-item"><div class="badge-icon">✦</div><span class="badge-label">Kuwait's First Russian Restaurant</span></div>
-      <div class="badge-divider"></div>
-      <div class="badge-item"><div class="badge-icon">✦</div><span class="badge-label">Premium Dining Experience</span></div>
-      <div class="badge-divider"></div>
-      <div class="badge-item"><div class="badge-icon">✦</div><span class="badge-label">Private Events &amp; Celebrations</span></div>
-      <div class="badge-divider"></div>
-      <div class="badge-item"><div class="badge-icon">✦</div><span class="badge-label">Pelmeni · Manti · Borscht · Medovik</span></div>
-      <div class="badge-divider"></div>
-      <div class="badge-item"><div class="badge-icon">✦</div><span class="badge-label">Russia · Georgia · Ukraine · Kazakhstan</span></div>
-      <div class="badge-divider"></div>
-      <div class="badge-item"><div class="badge-icon">✦</div><span class="badge-label">5-Star Rated Experience</span></div>
-      <div class="badge-divider"></div>
-      <!-- SET 2 (exact duplicate for seamless loop) -->
-      <div class="badge-item"><div class="badge-icon">✦</div><span class="badge-label">Authentic Russian Recipes</span></div>
-      <div class="badge-divider"></div>
-      <div class="badge-item"><div class="badge-icon">✦</div><span class="badge-label">Kuwait's First Russian Restaurant</span></div>
-      <div class="badge-divider"></div>
-      <div class="badge-item"><div class="badge-icon">✦</div><span class="badge-label">Premium Dining Experience</span></div>
-      <div class="badge-divider"></div>
-      <div class="badge-item"><div class="badge-icon">✦</div><span class="badge-label">Private Events &amp; Celebrations</span></div>
-      <div class="badge-divider"></div>
-      <div class="badge-item"><div class="badge-icon">✦</div><span class="badge-label">Pelmeni · Manti · Borscht · Medovik</span></div>
-      <div class="badge-divider"></div>
-      <div class="badge-item"><div class="badge-icon">✦</div><span class="badge-label">Russia · Georgia · Ukraine · Kazakhstan</span></div>
-      <div class="badge-divider"></div>
-      <div class="badge-item"><div class="badge-icon">✦</div><span class="badge-label">5-Star Rated Experience</span></div>
-      <div class="badge-divider"></div>
+      <span class="mq-item">Authentic Russian Recipes</span>
+      <span class="mq-sep">✦</span>
+      <span class="mq-item">Kuwait's First Russian Restaurant</span>
+      <span class="mq-sep">✦</span>
+      <span class="mq-item">Premium Dining Experience</span>
+      <span class="mq-sep">✦</span>
+      <span class="mq-item">Private Events &amp; Celebrations</span>
+      <span class="mq-sep">✦</span>
+      <span class="mq-item">Pelmeni · Manti · Borscht · Medovik</span>
+      <span class="mq-sep">✦</span>
+      <span class="mq-item">Russia · Georgia · Ukraine · Kazakhstan</span>
+      <span class="mq-sep">✦</span>
+      <span class="mq-item">5-Star Rated Experience</span>
+      <span class="mq-sep">✦</span>
+      <span class="mq-item">Open Daily — Lunch &amp; Dinner</span>
+      <span class="mq-sep">✦</span>
+      <!-- SET 2 — exact duplicate for seamless loop -->
+      <span class="mq-item">Authentic Russian Recipes</span>
+      <span class="mq-sep">✦</span>
+      <span class="mq-item">Kuwait's First Russian Restaurant</span>
+      <span class="mq-sep">✦</span>
+      <span class="mq-item">Premium Dining Experience</span>
+      <span class="mq-sep">✦</span>
+      <span class="mq-item">Private Events &amp; Celebrations</span>
+      <span class="mq-sep">✦</span>
+      <span class="mq-item">Pelmeni · Manti · Borscht · Medovik</span>
+      <span class="mq-sep">✦</span>
+      <span class="mq-item">Russia · Georgia · Ukraine · Kazakhstan</span>
+      <span class="mq-sep">✦</span>
+      <span class="mq-item">5-Star Rated Experience</span>
+      <span class="mq-sep">✦</span>
+      <span class="mq-item">Open Daily — Lunch &amp; Dinner</span>
+      <span class="mq-sep">✦</span>
     </div>
   </div>
 
@@ -904,6 +981,22 @@
             { opacity:1, y:0, scale:1, stagger:.1, duration:.5, ease:'power2.out' }
           );
         }
+      });
+    });
+
+    /* ─── HAMBURGER MENU ─── */
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('open');
+      mobileMenu.classList.toggle('open');
+      document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : '';
+    });
+    document.querySelectorAll('.mobile-link').forEach(link => {
+      link.addEventListener('click', () => {
+        hamburger.classList.remove('open');
+        mobileMenu.classList.remove('open');
+        document.body.style.overflow = '';
       });
     });
   </script>
